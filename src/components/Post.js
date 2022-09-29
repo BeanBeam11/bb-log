@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import postData from '../json/post.json';
+import { useSelector } from 'react-redux';
 
 export default function Post() {
+    const posts = useSelector((state) => state.post.posts);
+
     return (
         <div className="w-4/5 h-auto grid grid-cols-3 gap-6">
-            {postData.map((el, index) => (
+            {posts.map((el, index) => (
                 <Link
                     to={`/post/${el.id}`}
                     className="w-full h-30 bg-white rounded-lg drop-shadow-md overflow-hidden"

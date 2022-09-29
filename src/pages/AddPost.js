@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addPost } from '../redux/postSlice';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -8,13 +10,15 @@ export default function AddPost() {
     const [image, setImage] = useState('');
     const [content, setContent] = useState('');
 
+    const dispatch = useDispatch();
+
     const handleAddPost = () => {
-        alert(`
-            標題： ${title}
-            作者： ${author}
-            封面圖： ${image}
-            內容： ${content}
-        `);
+        dispatch(addPost({ title, author, image, content }));
+        alert('成功發布文章！');
+        setTitle('');
+        setAuthor('');
+        setImage('');
+        setContent('');
     };
 
     return (
