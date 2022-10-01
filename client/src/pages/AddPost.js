@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { addPost } from '../redux/postSlice';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { createPost } from '../api';
 
 export default function AddPost() {
     const [title, setTitle] = useState('');
@@ -12,8 +13,10 @@ export default function AddPost() {
 
     const dispatch = useDispatch();
 
-    const handleAddPost = () => {
-        dispatch(addPost({ title, author, image, content }));
+    const handleAddPost = async () => {
+        // dispatch(addPost({ title, author, image, content }));
+        const res = await createPost({ title, author, image, content });
+        console.log(res.data);
         alert('成功發布文章！');
         setTitle('');
         setAuthor('');
