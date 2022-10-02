@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Post from '../components/Post';
+import { getAllPost } from '../api';
 
 export default function Home() {
     const [keyword, setKeyword] = useState('');
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        fetchAllPost();
+    }, []);
+
+    const fetchAllPost = async () => {
+        const res = await getAllPost();
+        setPosts(res.data.data);
+    };
 
     const handleSearch = () => {
         alert('搜尋： ' + keyword);
@@ -27,7 +38,7 @@ export default function Home() {
                     ></input>
                     <MagnifyingGlassIcon className="absolute h-6 w-6 my-2 ml-2" />
                 </div>
-                <Post />
+                <Post data={posts} />
             </div>
             <Footer />
         </div>

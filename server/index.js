@@ -27,6 +27,23 @@ app.post('/api/v1/posts', async (req, res) => {
     }
 });
 
+app.get('/api/v1/posts', async (req, res) => {
+    try {
+        const post = await Post.find();
+        res.status(200).json({
+            status: 'success',
+            data: {
+                data: post,
+            },
+        });
+    } catch (err) {
+        console.log(err);
+        res.json({
+            status: 'error',
+        });
+    }
+});
+
 app.listen(8080, () => {
     console.log('Server listening on port 8080');
 });
