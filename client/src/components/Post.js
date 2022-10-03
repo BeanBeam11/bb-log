@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { formatDate } from '../utils/formatter';
 
 export default function Post(props) {
     const { data } = props;
@@ -16,7 +17,8 @@ export default function Post(props) {
                     <div className="p-6">
                         <div className="text-xl font-bold mb-1">{el.title}</div>
                         <div className="text-sm mb-3">
-                            {el.author} <span>{el.createdAt}</span>
+                            <span className="font-medium">{el.author}</span>
+                            <span className="ml-3 opacity-80 text-sm">{formatDate(el.createdAt)}</span>
                         </div>
                         <div className="">{el.content}</div>
                     </div>

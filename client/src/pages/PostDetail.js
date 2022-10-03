@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import postData from '../json/post.json';
+import { getPost } from '../api';
+import { formatDate } from '../utils/formatter';
 
 export default function PostDetail() {
     const { id } = useParams();
-    const post = postData.find((el) => el.id === id);
+    const [post, setPost] = useState({});
+
+    useEffect(() => {
+        fetchPost();
+    }, []);
+
+    const fetchPost = async () => {
+        const res = await getPost({ id });
+        setPost(res.data.data);
+    };
 
     return (
         <div className="flex flex-col items-center">
@@ -16,7 +26,8 @@ export default function PostDetail() {
                 <div className="p-10">
                     <div className="text-3xl font-bold mb-2">{post.title}</div>
                     <div className="mb-6">
-                        {post.author} <span>{post.created_at}</span>
+                        <span className="font-medium">{post.author}</span>
+                        <span className="ml-3 opacity-80 text-sm">{formatDate(post.createdAt)}</span>
                     </div>
                     <div className="text-lg">{post.content}</div>
                 </div>
