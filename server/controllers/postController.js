@@ -11,7 +11,7 @@ exports.getAllPost = async (req, res) => {
         });
     } catch (err) {
         console.log(err);
-        res.json({
+        res.status(404).json({
             status: 'error',
         });
     }
@@ -28,7 +28,7 @@ exports.getPost = async (req, res) => {
         });
     } catch (err) {
         console.log(err);
-        res.json({
+        res.status(404).json({
             status: 'error',
         });
     }
@@ -45,7 +45,7 @@ exports.createPost = async (req, res) => {
         });
     } catch (err) {
         console.log(err);
-        res.json({
+        res.status(400).json({
             status: 'error',
         });
     }

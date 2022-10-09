@@ -1,25 +1,19 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addPost } from '../redux/postSlice';
+import { useSelector } from 'react-redux';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { createPost } from '../api';
 
 export default function AddPost() {
     const [title, setTitle] = useState('');
-    const [author, setAuthor] = useState('');
     const [image, setImage] = useState('');
     const [content, setContent] = useState('');
 
-    const dispatch = useDispatch();
+    const author = useSelector((state) => state.account.user.name);
 
     const handleAddPost = async () => {
-        // dispatch(addPost({ title, author, image, content }));
         const res = await createPost({ title, author, image, content });
-        console.log(res.data);
-        alert('成功發布文章！');
         setTitle('');
-        setAuthor('');
         setImage('');
         setContent('');
     };
@@ -38,15 +32,6 @@ export default function AddPost() {
                     value={title}
                     maxLength={100}
                     onChange={(e) => setTitle(e.target.value)}
-                    className="w-full h-10 rounded-md bg-gray-50 px-4 py-2 mb-10 focus:outline-0 focus:bg-yellow-700/5"
-                ></input>
-                <div className="text-2xl font-bold mb-4">作者</div>
-                <input
-                    type="text"
-                    placeholder={'作者'}
-                    value={author}
-                    maxLength={100}
-                    onChange={(e) => setAuthor(e.target.value)}
                     className="w-full h-10 rounded-md bg-gray-50 px-4 py-2 mb-10 focus:outline-0 focus:bg-yellow-700/5"
                 ></input>
                 <div className="text-2xl font-bold mb-4">
