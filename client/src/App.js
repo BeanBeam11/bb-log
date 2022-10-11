@@ -1,3 +1,4 @@
+import "react-loading-skeleton/dist/skeleton.css";
 import './App.css';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from './pages/Home';

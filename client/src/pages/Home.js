@@ -9,6 +9,7 @@ import { getAllPost } from '../api';
 export default function Home() {
     const [keyword, setKeyword] = useState('');
     const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate();
 
@@ -19,6 +20,7 @@ export default function Home() {
     const fetchAllPost = async () => {
         const res = await getAllPost();
         setPosts(res.data.data);
+        setLoading(false);
     };
 
     const handleSearch = () => {
@@ -45,7 +47,7 @@ export default function Home() {
                     ></input>
                     <MagnifyingGlassIcon className="absolute h-6 w-6 my-2 ml-2" />
                 </div>
-                <Post data={posts} />
+                <Post data={posts} loading={loading} />
             </div>
             <Footer />
         </div>
