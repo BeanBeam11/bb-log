@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Loading from '../components/Loading';
 import { getPost } from '../api';
 import { formatDate } from '../utils/formatter';
 
@@ -45,6 +46,7 @@ export default function PostDetail() {
                     <div className="text-lg">{loading ? <Skeleton count={3} /> : post.content}</div>
                 </div>
             </div>
+            {loading && <Loading />}
             <Footer />
         </div>
     );
