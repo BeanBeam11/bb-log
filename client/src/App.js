@@ -6,6 +6,7 @@ import PostDetail from './pages/PostDetail';
 import AddPost from './pages/AddPost';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Search from './pages/Search';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register />,
   },
+  {
+    path: "/search",
+    element: <Search />,
+  }
 ]);
 
 function App() {

@@ -50,3 +50,35 @@ exports.createPost = async (req, res) => {
         });
     }
 };
+
+exports.searchPost = async (req, res, next) => {
+    try {
+        const { keyword } = req.params;
+
+        const posts = await Post.aggregate([
+            {
+                $search: {
+                    index: 'default',
+                    text: {
+                        query: `(.*)${keyword}(.*)`,
+                        path: {
+                            wildcard: '*',
+                        },
+                    },
+                },
+            },
+        ]);
+
+        res.status(200).json({
+            status: 'success',
+            data: {
+                data: posts,
+            },
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(404).json({
+            status: 'error',
+        });
+    }
+};

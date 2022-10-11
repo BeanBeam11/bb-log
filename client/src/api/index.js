@@ -54,3 +54,14 @@ export const getPost = async ({ id }) => {
         alert('讀取文章失敗 (|||ﾟдﾟ)');
     }
 };
+
+export const searchPost = async ({ keyword }) => {
+    try {
+        const res = await axios.get(`${baseUrl}api/v1/posts/searchPost/${keyword}`);
+        console.log(res.data)
+        return res.data;
+    } catch (err) {
+        console.log(err.response);
+        alert('讀取文章失敗 (|||ﾟдﾟ)');
+    }
+};
