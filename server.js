@@ -22,6 +22,10 @@ app.use(cors());
 app.options('*', cors());
 app.use(express.json());
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+}
+
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/posts', postRouter);
 
