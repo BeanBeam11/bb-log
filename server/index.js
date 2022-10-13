@@ -19,11 +19,13 @@ mongoose
     .then(() => console.log('DB connection successful!'));
 
 app.use(cors());
+app.options('*', cors());
 app.use(express.json());
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/posts', postRouter);
 
-app.listen(8080, () => {
-    console.log('Server listening on port 8080');
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Server listening on port ${port}`);
 });
