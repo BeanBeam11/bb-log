@@ -4,6 +4,7 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Post from '../components/Post';
+import BackToTop from '../components/BackToTop';
 import { getAllPost } from '../api';
 
 export default function Home() {
@@ -49,6 +50,7 @@ export default function Home() {
                 </div>
                 <Post data={posts} loading={loading} />
             </div>
+            <BackToTop />
             <Footer />
         </div>
     );
