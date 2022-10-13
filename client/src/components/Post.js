@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
-import { formatDate } from '../utils/formatter';
+import { formatDate, subString } from '../utils/formatter';
 
 export default function Post(props) {
     const { data, loading } = props;
@@ -22,7 +22,7 @@ export default function Post(props) {
 
                     <div className="p-6">
                         <div className="text-xl font-bold mb-1">
-                            {loading ? <Skeleton width="80%" height="1.25rem" /> : el.title}
+                            {loading ? <Skeleton width="80%" height="1.25rem" /> : subString(el.title, 30)}
                         </div>
                         <div className="text-sm mb-3">
                             <span className="font-medium">
@@ -32,15 +32,7 @@ export default function Post(props) {
                                 {loading ? <Skeleton width="25%" /> : formatDate(el.createdAt)}
                             </span>
                         </div>
-                        <div className="">
-                            {loading ? (
-                                <Skeleton count={3} />
-                            ) : el.content.length > 60 ? (
-                                `${el.content.slice(0, 60)}...`
-                            ) : (
-                                el.content
-                            )}
-                        </div>
+                        <div className="">{loading ? <Skeleton count={3} /> : subString(el.content, 120)}</div>
                     </div>
                 </Link>
             ))}
