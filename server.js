@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 
 const userRouter = require('./routes/userRoutes');
 const postRouter = require('./routes/postRoutes');
+const healthRouter = require('./routes/healthRoutes');
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/posts', postRouter);
+app.use('/health', healthRouter);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
