@@ -27,6 +27,10 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
 }
 
+app.get('/', (req, res) => {
+    res.send('Hello, welcome!');
+});
+
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/posts', postRouter);
 app.use('/health', healthRouter);
